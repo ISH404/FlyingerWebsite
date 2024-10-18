@@ -1,0 +1,43 @@
+body {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 0px;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: deepskyblue;
+    color: white;
+}
+.icon {
+    font-size: 1.5em;
+}
+.menu {
+    display: flex;
+    gap: 15px;
+}
+main {
+    display: grid;
+    grid-template-columns: 100%;
+    gap: 10px;
+    padding: 10px;
+}
+.content {
+    background-color: #e4e4e4;
+    padding: 10px;
+}
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: lightblue;
+    color: white;
+}
+.breadcrumbs {
+    text-align: center;
+}
