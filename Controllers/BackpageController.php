@@ -1,8 +1,6 @@
 <?php
-//namespace Controllers;
 
-class BackpageController
-{
+class BackpageController {
     public function index() : void{
         $webpageTitle = "Backpage";
         $contextWebpage ="<h1>Backpage Content</h1>

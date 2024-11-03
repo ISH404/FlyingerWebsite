@@ -1,8 +1,7 @@
 <?php
 
 class Database {
-    // Private variables because no other class should directly call them.
-    private $dbConnection;
+    private PDO $dbConnection; // Private variable because no other class should directly interact with it.
 
     function __construct(){
         $this->createConnection();
@@ -10,13 +9,13 @@ class Database {
 
     /**
      * Is used to return the instance of dbConnection without directly accessing it.
-     * @return mixed
+     * @return PDO
      */
-    public function get_dbConnection(){
+    public function get_dbConnection() : PDO {
         return $this->dbConnection;
     }
 
-    private function createConnection(){
+    private function createConnection() : void {
         $servername = "localhost";
         $username = "root";
         $password = "root";

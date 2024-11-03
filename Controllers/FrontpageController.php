@@ -1,7 +1,6 @@
 <?php
-//namespace Controllers;
 
-class FrontpageController{
+class FrontpageController {
     public function index() : void {
         $webpageTitle = "Frontpage";
         $contextWebpage ="<h1>Frontpage Content</h1>

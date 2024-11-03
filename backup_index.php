@@ -1,10 +1,9 @@
 <?php
-require 'functions.php';
 
-//If you wanted to use paramaters from the url for whatever reason parse_url($_SERVER['REQUEST_URI'])['path'][];
-$path = $_SERVER['PATH_INFO'] ?? '/'; //Grabs the path after localhost:portnumber if present, else set path to default index
+//Grabs the path after localhost:portnumber if present, else set path to default index
+$path = $_SERVER['PATH_INFO'] ?? '/';
 
-switch ($path) {
+switch($path){
     case '/':
     case '/frontpage':
         require_once './Controllers/FrontpageController.php';
@@ -21,15 +20,23 @@ switch ($path) {
     case '/blogpage':
         require_once './Controllers/BlogpageController.php';
         $blogpage = new BlogpageController();
-        $blogpage->index();
-        break;
 
-    case '/blogpage/submit':
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $blogpage->createPost();
+        } else {
+            $blogpage->index();
+        }
+        break;
+    case '/blogpage/addComment':
         require_once './Controllers/BlogpageController.php';
         $blogpage = new BlogpageController();
-        $blogpage->determineAction();
+        $blogpage->createComment();
         break;
-
+    case '/blogpage/deleteAllPosts':
+        require_once './Controllers/BlogpageController.php';
+        $blogpage = new BlogpageController();
+        $blogpage->deleteEveryPost();
+        break;
     default:
         echo 'something went wrong';
         break;

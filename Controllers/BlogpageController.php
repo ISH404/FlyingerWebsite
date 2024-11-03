@@ -1,10 +1,8 @@
 <?php
-//namespace Controllers;
 
-class BlogpageController
-{
-    private $postModel;
-    private $commentModel;
+class BlogpageController {
+    private PostModel $postModel; //model used related to posts.
+    private PostModel $commentModel; //model used related to comments on posts.
 
     function __construct() {
         require_once "./Models/PostModel.php";
@@ -12,55 +10,46 @@ class BlogpageController
         $this->postModel = new PostModel();
         $this->commentModel = new CommentModel();
     }
-    public function index() : void{
+
+    public function index() : void {
         $webpageTitle = 'Blog Page';
         $results = $this->postModel->getPosts();
         require_once "./views/blogpage.view.php";
     }
 
-    public function createPost() : void {
+    public function determineAction() : void {
+        switch ($_POST['_submit']) {
+            case 'createPost':
+                self::createPost();
+                break;
+            case 'createComment':
+                self::createComment();
+                break;
+            case 'deleteEveryPost':
+                self::deleteEveryPost();
+                break;
+        }
+    }
+
+    private function createPost() : void {
         $this->postModel->createPost($_POST['postTitle'], $_POST['postAuthor'], $_POST['postContent']);
-        self::index();
+        //Wanted to use self::index(); instead of header, but that doesn't remove the form action from the url.
+        //Could probably be fixed with a proper router.
+        header('Location: /blogpage');
     }
 
-    public function deleteEveryPost() : void {
+    private function createComment() : void {
+        $this->commentModel->createComment($_POST['commentAuthor'], $_POST['commentContent'], $_POST['commentPostId']);
+        //Wanted to use self::index(); instead of header, but that doesn't remove the form action from the url.
+        //Could probably be fixed with a proper router.
+        header('Location: /blogpage');
+    }
+
+    private function deleteEveryPost() : void {
         $this->postModel->deleteEveryPost();
-        self::index();
+        //Wanted to use self::index(); instead of header, but that doesn't remove the form action from the url.
+        //Could probably be fixed with a proper router.
+        header('Location: /blogpage');
     }
-
-    public function addComment() : void {
-        $this->commentModel->addComment($_POST['commentAuthor'], $_POST['commentContent'], $_POST['commentPostId']);
-        self::index();
-    }
-
-//    public function inClassExample(){
-//        switch ($_GET['action']) {
-//            case 'save':
-//                createPost();
-//                break;
-//            case 'edit':
-//                updatePost();
-//                break;
-//            case 'delete':
-//                deletePost($_GET['id']);
-//                break;
-//            case 'list':
-//                break;
-//        }
-//    }
-//
-//    function updatePostExample($id, $title, $author, $content){
-//        include './Controllers/DatabaseItems.php';
-//        try {
-//            $sql = $this->conn->prepare("UPDATE posts SET title = :title, author = :author, content = :content WHERE id = :id");
-//            $sql->bindParam(":title", $title);
-//            $sql->bindParam(":author", $author);
-//            $sql->bindParam(":content", $content);
-//            $sql->bindParam(":id", $id);
-//            $sql->execute();
-//        } catch (PDOException $e) {
-//            "Error: " . $sql . $e->getMessage();
-//        }
-//    }
 }
 ?>
