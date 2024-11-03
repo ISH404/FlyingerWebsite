@@ -1,8 +1,8 @@
 <?php
 
 class BlogpageController {
-    private PostModel $postModel; //model used related to posts.
-    private CommentModel $commentModel; //model used related to comments on posts.
+    private PostModel $postModel; //model related to posts.
+    private CommentModel $commentModel; //model related to comments on posts.
 
     function __construct() {
         require_once "./Models/PostModel.php";
@@ -13,7 +13,7 @@ class BlogpageController {
 
     public function index() : void {
         $webpageTitle = 'Blog Page';
-        $results = $this->postModel->getPosts();
+        $posts = $this->postModel->getPosts();
         require_once "./views/blogpage.view.php";
     }
 

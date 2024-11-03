@@ -47,7 +47,7 @@ Class PostModel extends Database {
      * @return void
      */
     public function createPost($title, $author, $content) : void {
-        try{
+        try {
             $query = $this->get_dbConnection()->prepare("INSERT INTO posts (title, author, content) VALUES (:title, :author, :content)");
             $query->bindParam(":title", $title);
             $query->bindParam(":author", $author);

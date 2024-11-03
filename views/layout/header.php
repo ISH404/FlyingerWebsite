@@ -16,7 +16,8 @@
     <div class="menu">
         <a href="/frontpage">Front</a>
         <a href="/backpage">Backside</a>
-        <a href="/blogpage">Blogpage</a>
+        <a href="/projectpage">Projects</a>
+        <a href="/blogpage">Blog</a>
     </div>
 </header>
 <!-- End Header -->

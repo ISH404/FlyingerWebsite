@@ -30,6 +30,18 @@ switch ($path) {
         $blogpage->determineAction();
         break;
 
+    case '/projectpage':
+        require_once './Controllers/ProjectpageController.php';
+        $projectpage = new ProjectpageController();
+        $projectpage->index();
+        break;
+
+    case '/projectpage/submit':
+        require_once './Controllers/ProjectpageController.php';
+        $projectpage = new ProjectpageController();
+        $projectpage->determineAction();
+        break;
+
     default:
         echo 'something went wrong';
         break;
