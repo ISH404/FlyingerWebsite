@@ -2,7 +2,7 @@
 
 class BlogpageController {
     private PostModel $postModel; //model used related to posts.
-    private PostModel $commentModel; //model used related to comments on posts.
+    private CommentModel $commentModel; //model used related to comments on posts.
 
     function __construct() {
         require_once "./Models/PostModel.php";
