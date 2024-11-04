@@ -25,33 +25,31 @@ class ProjectModel extends Database {
         $targetPath = './uploaded_images/'.$file_name; //Path where file will be stored if validation succeeds
 
         //Validate if file doesn't already exist, the extension is valid and the file size is not over 1MB.
-        try {
             if(!file_exists($targetPath) && in_array($file_ext, $allowedExtensions) && $file_size <= 1000000) {
                 //Store the provided file in the giving path
                 move_uploaded_file($file['tmp_name'], $targetPath);
                 return true;
             }
-        } catch (Exception $e) {
-            echo 'Upload failed. Only jpeg, jpg, png files of 1mb and smaller are allowed.
-              If it still fails, try changing file name as the duplicates are not allowed' .$e->getMessage();
-            return false;
-        }
         return false;
     }
 
     public function createProject($name, $description, $thumbnail) : void {
         if($this->validateFile($thumbnail)) {
             try {
-                $query = $this->get_dbConnection()->prepare("INSERT INTO projects (name, description) VALUES (:name, :description)");
+                $query = $this->get_dbConnection()->prepare("INSERT INTO projects (name, description, thumbnail_name) VALUES (:name, :description :thumbnail)");
                 $query->bindParam(":name", $name);
                 $query->bindParam(":description", $description);
-                //$query->bindParam(":thumbnail", $thumbnail['name']);
+                $query->bindParam(":thumbnail", $thumbnail['name']);
                 $query->execute();
             } catch (PDOException $e) {
                 echo $e->getMessage();
             }
         } else {
-            echo "Invalid Filetype";
+            //Display error and sleep for 4 seconds so it can be read before page redirect.
+            echo "File failed to validate, please try a different one. <br>
+                  Max file size 1MB.<br>
+                  Allowed extensions: jpeg, jpg, png.<br> 
+                  Duplicate file names are not allowed.";
         }
     }
     public function updateProject() : void {

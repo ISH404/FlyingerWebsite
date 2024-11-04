@@ -1,29 +1,27 @@
 * {
     box-sizing: border-box;
+
 }
 
-html {
+html{
     color: white;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', sans-serif;
 }
 
 header {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding: 10px;
+    align-items: center;
     background-color: #222429;
+    padding: 10px;
 }
 
-body {
+body{
     display: grid;
     grid-template-rows: auto 1fr auto;
+    /*background-color: #0d0d14;*/
     gap: 0;
     margin: 0;
-}
-
-main {
-    display: grid;
 }
 
 footer {
@@ -32,6 +30,7 @@ footer {
     align-items: center;
     padding: 10px;
     background-color: #222429;
+    color: white;
 }
 
 .breadcrumbs {
@@ -44,53 +43,31 @@ footer {
 
 .menu {
     display: flex;
+    gap: 15px;
 }
 
-.menu a {
-    text-decoration: none;
-    margin-left: 20px;
-    padding: 5px;
-    color: white;
-}
-
-.menu a:hover {
-    border: 2px inset grey;
-    border-radius: 5px;
+.content {
+    background-color: #222429;
 }
 
 .grid-container {
     display: grid;
     border: 1px solid red;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 10px;
-    padding: 10px;
-}
-
-.content {
-    background-color: #333231;
-    padding: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
+    justify-content: center;
 }
 
 .create-posts-section h2 {
     text-align: center;
 }
 
-.create-posts-section {
-    text-align: center;
-}
 
-#postContent {
-    height: 100px;
-    resize: none;
-}
 
 .blog-posts-section h2 {
     text-align: center;
 }
 
 .blog-post, .blogpost p {
-    background-color: #222429;
-    overflow-wrap: break-word;
     border-style: ridge;
     border-width: 3px;
     border-radius: 10px;
@@ -98,20 +75,9 @@ footer {
 }
 
 .blog-post-comment {
-    background-color: #222429;
-    overflow-wrap: break-word;
     border-style: ridge;
     border-width: 3px;
     border-radius: 10px;
     margin-left: 30px;
-    margin-bottom: 5px;
     padding: 5px;
 }
-
-input[type=text], textarea {
-    width: 80%;
-    padding: 6px 10px;
-    margin: 6px 0;
-    border-radius: 5px;
-}
-
