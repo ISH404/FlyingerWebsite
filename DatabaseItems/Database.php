@@ -15,6 +15,11 @@ class Database {
         return $this->dbConnection;
     }
 
+
+    /**
+     * Tries to create the connection with the local database through PDO.
+     * @return void
+    */
     private function createConnection() : void {
         $servername = "localhost";
         $username = "root";

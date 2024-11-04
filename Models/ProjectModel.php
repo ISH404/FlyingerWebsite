@@ -3,6 +3,11 @@ require_once './DatabaseItems/Database.php';
 
 class ProjectModel extends Database {
 
+    /**
+     * Pulls all the projects from the database.
+     * If nothing is found returns an empty array.
+     * @return array
+    */
     public function getProjects() : array {
         try {
             $query = $this->get_dbConnection()->prepare("SELECT * FROM projects");
@@ -15,6 +20,37 @@ class ProjectModel extends Database {
         return [];
     }
 
+    /**
+     * @param $name $name of the project.
+     * @param $description $description of the project.
+     * @param $thumbnail $thumbnail of the project.
+     * Prepare a sql query with the given parameters to create a project and execute it.
+     * @return void
+    */
+    public function createProject($name, $description, $thumbnail) : void {
+            try {
+                $query = $this->get_dbConnection()->prepare("INSERT INTO projects (name, description, thumbnail_name) VALUES (:name, :description :thumbnail)");
+                $query->bindParam(":name", $name);
+                $query->bindParam(":description", $description);
+                $query->bindParam(":thumbnail", $thumbnail);
+                $query->execute();
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+    }
+
+    public function updateProject() : void {
+
+    }
+    public function deleteProject() : void {
+
+    }
+
+    /**
+     * @param $file $uploaded project thumbnail.
+     * Validates the uploaded file. Checks if file extension and size are supported and checks if it already exists.
+     * @return bool
+     */
     private function validateFile($file) : bool {
         //https://www.w3schools.com/php/php_file_upload.asp
         $file_name = $file['name'];// Get file name
@@ -25,38 +61,11 @@ class ProjectModel extends Database {
         $targetPath = './uploaded_images/'.$file_name; //Path where file will be stored if validation succeeds
 
         //Validate if file doesn't already exist, the extension is valid and the file size is not over 1MB.
-            if(!file_exists($targetPath) && in_array($file_ext, $allowedExtensions) && $file_size <= 1000000) {
-                //Store the provided file in the giving path
-                move_uploaded_file($file['tmp_name'], $targetPath);
-                return true;
-            }
-        return false;
-    }
-
-    public function createProject($name, $description, $thumbnail) : void {
-        if($this->validateFile($thumbnail)) {
-            try {
-                $query = $this->get_dbConnection()->prepare("INSERT INTO projects (name, description, thumbnail_name) VALUES (:name, :description :thumbnail)");
-                $query->bindParam(":name", $name);
-                $query->bindParam(":description", $description);
-                $query->bindParam(":thumbnail", $thumbnail['name']);
-                $query->execute();
-            } catch (PDOException $e) {
-                echo $e->getMessage();
-            }
-        } else {
-            //Display error and sleep for 4 seconds so it can be read before page redirect.
-            echo "File failed to validate, please try a different one. <br>
-                  Max file size 1MB.<br>
-                  Allowed extensions: jpeg, jpg, png.<br> 
-                  Duplicate file names are not allowed.";
+        if(!file_exists($targetPath) && in_array($file_ext, $allowedExtensions) && $file_size <= 1000000) {
+            //Store the provided file in the giving path
+            move_uploaded_file($file['tmp_name'], $targetPath);
+            return true;
         }
-    }
-    public function updateProject() : void {
-
-    }
-
-    public function deleteProject() : void {
-
+        return false;
     }
 }

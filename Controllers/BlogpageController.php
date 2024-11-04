@@ -11,6 +11,11 @@ class BlogpageController {
         $this->commentModel = new CommentModel();
     }
 
+    /**
+     * Sets the webpageTitle and loads the corresponding view.
+     * Requests all posts to be displayed on the view.
+     * @return void
+     */
     public function index() : void {
         $webpageTitle = 'Blog Page';
         $posts = $this->postModel->getPosts();

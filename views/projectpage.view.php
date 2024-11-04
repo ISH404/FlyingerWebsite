@@ -6,7 +6,7 @@ require './views/layout/header.php';
 <main>
     <section id="myContent" class="content">
         <div class="create-projects-section">
-            <h1>Projectpage Content</h1>
+            <h1>Welcome to the project page</h1>
             <!--The section of the website where new projects can be created-->
             <h3>Create project</h3>
             <!--Enctype required when input type="file" is used in a form-->

@@ -5,9 +5,9 @@
  * think about sessions: x
  * add project: V
  * show projects: v
- * add thumbnail to projects
+ * add thumbnail to projects: x
  * edit project: x
- * delete project: x
+ * delete all projects: v
  * */
 
 class ProjectpageController
@@ -18,6 +18,12 @@ class ProjectpageController
         require_once './models/ProjectModel.php';
         $this->projectModel = new ProjectModel();
     }
+
+    /**
+     * Sets the webpageTitle and loads the corresponding view.
+     * Requests all projects to be displayed on the view.
+     * @return void
+     */
     public function index() : void {
         $webpageTitle = 'Project Page';
         $projects = $this->projectModel->getProjects();

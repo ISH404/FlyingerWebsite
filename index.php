@@ -4,6 +4,7 @@ require 'functions.php';
 //If you wanted to use paramaters from the url for whatever reason parse_url($_SERVER['REQUEST_URI'])['path'][];
 $path = $_SERVER['PATH_INFO'] ?? '/'; //Grabs the path after localhost:portnumber if present, else set path to default index
 
+//Switch that determines where to redirect to based on the url path.
 switch ($path) {
     case '/':
     case '/frontpage':
@@ -12,10 +13,16 @@ switch ($path) {
         $frontpage->index();
         break;
 
-    case '/backpage':
-        require_once './Controllers/BackpageController.php';
-        $backpage = new BackpageController();
-        $backpage->index();
+    case '/projectpage':
+        require_once './Controllers/ProjectpageController.php';
+        $projectpage = new ProjectpageController();
+        $projectpage->index();
+        break;
+
+    case '/projectpage/submit':
+        require_once './Controllers/ProjectpageController.php';
+        $projectpage = new ProjectpageController();
+        $projectpage->determineAction();
         break;
 
     case '/blogpage':
@@ -30,16 +37,16 @@ switch ($path) {
         $blogpage->determineAction();
         break;
 
-    case '/projectpage':
-        require_once './Controllers/ProjectpageController.php';
-        $projectpage = new ProjectpageController();
-        $projectpage->index();
+    case '/contactpage':
+        require_once './Controllers/ContactpageController.php';
+        $contactpage = new ContactpageController();
+        $contactpage->index();
         break;
 
-    case '/projectpage/submit':
-        require_once './Controllers/ProjectpageController.php';
-        $projectpage = new ProjectpageController();
-        $projectpage->determineAction();
+    case '/contactpage/submit':
+        require_once './Controllers/ContactpageController.php';
+        $contactpage = new ContactpageController();
+        $contactpage->sendEmail();
         break;
 
     default:

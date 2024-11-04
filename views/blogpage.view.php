@@ -5,7 +5,7 @@ require './views/layout/header.php';
 <!-- Start Main -->
 <main>
     <section id="myContent" class="content">
-        <h1>Blogpage Content</h1>
+        <h1>Welcome to the blog page</h1>
         <div class="grid-container">
             <div class="create-posts-section">
                 <!--The section of the website where new posts can be created-->
