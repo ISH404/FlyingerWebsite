@@ -1,0 +1,177 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    color: white;
+    font-family: Arial, sans-serif;
+    background-color: #333231;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #222429;
+}
+
+body {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 0;
+    margin: 0;
+}
+
+main {
+    display: grid;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #222429;
+}
+
+input[type=text], textarea {
+    width: 80%;
+    padding: 6px 10px;
+    margin: 6px 0;
+    border-radius: 5px;
+}
+
+.breadcrumbs {
+    text-align: center;
+}
+
+.icon {
+    font-size: 1.5em;
+}
+
+.menu {
+    display: flex;
+}
+
+.menu a {
+    text-decoration: none;
+    margin-left: 20px;
+    padding: 5px;
+    color: white;
+}
+
+.menu a:hover {
+    border: 2px inset grey;
+    border-radius: 5px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 10px;
+    padding: 10px;
+}
+
+.content {
+    background-color: #333231;
+    padding: 10px;
+}
+
+.post-forms-section h2 {
+    text-align: center;
+}
+
+.post-forms-section, .create-projects-section {
+    text-align: center;
+}
+
+#postContent, #contactMessage {
+    height: 100px;
+    resize: none;
+}
+
+.blog-posts-section h2, .projects-section h2 {
+    text-align: center;
+}
+
+.blog-post, .project {
+    margin-top: 25px;
+}
+
+.blog-post, .blogpost p, .project {
+    background-color: #222429;
+    overflow-wrap: break-word;
+    border-style: ridge;
+    border-width: 3px;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.blog-post-comment {
+    background-color: #222429;
+    overflow-wrap: break-word;
+    border-style: ridge;
+    border-width: 3px;
+    border-radius: 10px;
+    margin-left: 30px;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
+.edit-posts-section {
+    display: none;
+}
+
+.replies-section {
+    font-weight: bold;
+    margin-left: 30px;
+}
+
+.project-thumbnail {
+    max-width: 256px;
+    max-height: 128px;
+}
+
+.contact-form-section {
+    width: 40%;
+}
+
+.blog-post-buttons{
+    display: flex;
+    flex-direction: row;
+}
+
+.login-form-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.about-me {
+    display: flex;
+    flex-direction: column;
+}
+
+.submit-btn {
+    padding: 5px;
+    margin-left: 5px;
+}
+
+.edit-btn {
+    height: 29px;
+}
+
+.error-return {
+    text-decoration: none;
+    color: lightblue;
+}
+
+.error-return:hover {
+    text-decoration: underline;
+    color:red;
+}
+
+.hidden-id {
+    display: none;
+}
