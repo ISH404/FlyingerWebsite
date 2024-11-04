@@ -1,15 +1,5 @@
 <?php
 
-/*TODO:
- * setup project database: V
- * think about sessions: x
- * add project: V
- * show projects: v
- * add thumbnail to projects: x
- * edit project: x
- * delete all projects: v
- * */
-
 class ProjectpageController
 {
     private ProjectModel $projectModel; //model related to projects
@@ -30,6 +20,10 @@ class ProjectpageController
         require_once './views/projectpage.view.php';
     }
 
+    /**
+     * Determines which method needs to be called based on which value the form had on _submit in the POST request.
+     * @return void
+     */
     public function determineAction() : void {
         switch ($_POST['_submit']) {
             case 'createProject':
@@ -38,23 +32,36 @@ class ProjectpageController
             case 'editProject':
                 self::editProject();
                 break;
-            case 'deleteProject':
-                self::deleteProject();
+            case 'deleteEveryProject':
+                self::deleteEveryProject();
                 break;
         }
     }
 
+    /**
+     * Forwards the request to create a project to the correct model.
+     * @return void
+     */
     private function createProject() : void {
         //Form input type="file" is not stored in $_POST so $_FILES is required.
         $this->projectModel->createProject($_POST['projectName'], $_POST['projectDescription'], $_FILES['projectThumbnail']);
         header('Location: /projectpage');
     }
 
+    /**
+     * Forwards the request to edit a project to the correct model.
+     * @return void
+     */
     private function editProject() : void {
-
+        //TODO:
     }
 
-    private function deleteProject() : void {
-
+    /**
+     * Forwards the request to delete all projects to the correct model.
+     * @return void
+     */
+    private function deleteEveryProject() : void {
+        $this->projectModel->deleteEveryProject();
+        header('Location: /projectpage');
     }
 }

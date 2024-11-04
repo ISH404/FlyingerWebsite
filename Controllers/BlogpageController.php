@@ -22,6 +22,10 @@ class BlogpageController {
         require_once "./views/blogpage.view.php";
     }
 
+    /**
+     * Determines which method needs to be called based on which value the form had on _submit in the POST request.
+     * @return void
+    */
     public function determineAction() : void {
         switch ($_POST['_submit']) {
             case 'createPost':
@@ -36,24 +40,33 @@ class BlogpageController {
         }
     }
 
+    /**
+     * Forwards the request to create a post to the correct model.
+     * @return void
+     */
     private function createPost() : void {
         $this->postModel->createPost($_POST['postTitle'], $_POST['postAuthor'], $_POST['postContent']);
         //Wanted to use self::index(); instead of header, but that doesn't remove the form action from the url.
         //Could probably be fixed with a proper router.
+        //Counts for all methods with this header.
         header('Location: /blogpage');
     }
 
+    /**
+     * Forwards the request to create a comment to the correct model.
+     * @return void
+     */
     private function createComment() : void {
         $this->commentModel->createComment($_POST['commentAuthor'], $_POST['commentContent'], $_POST['commentPostId']);
-        //Wanted to use self::index(); instead of header, but that doesn't remove the form action from the url.
-        //Could probably be fixed with a proper router.
         header('Location: /blogpage');
     }
 
+    /**
+     * Forwards the request to delete every post to the correct model.
+     * @return void
+     */
     private function deleteEveryPost() : void {
         $this->postModel->deleteEveryPost();
-        //Wanted to use self::index(); instead of header, but that doesn't remove the form action from the url.
-        //Could probably be fixed with a proper router.
         header('Location: /blogpage');
     }
 }

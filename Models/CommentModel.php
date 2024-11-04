@@ -7,7 +7,7 @@ Class CommentModel extends Database {
      * @param $author $creator of the comment.
      * @param $content $conte of the comment.
      * @param $post_id $id of the post which the comment is made on.
-     * Prepare a sql query with the given parameters to create a comment and execute it.
+     * Prepares a sql query with the given parameters to create a comment and executes it.
      * @return void
     */
     public function createComment($author, $content, $post_id) : void {
@@ -24,7 +24,7 @@ Class CommentModel extends Database {
 
     /**
      * @param $comment_id $id of the comment that is getting deleted.
-     * Prepare a sql query with the given parameters to delete a comment and execute it.
+     * Prepares a sql query with the given parameters to delete a comment and executes it.
      * @return void
     */
     public function deleteComment($comment_id) : void {

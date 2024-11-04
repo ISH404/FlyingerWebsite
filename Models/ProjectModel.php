@@ -24,7 +24,7 @@ class ProjectModel extends Database {
      * @param $name $name of the project.
      * @param $description $description of the project.
      * @param $thumbnail $thumbnail of the project.
-     * Prepare a sql query with the given parameters to create a project and execute it.
+     * Prepares a sql query with the given parameters to create a project and executes it.
      * @return void
     */
     public function createProject($name, $description, $thumbnail) : void {
@@ -42,10 +42,27 @@ class ProjectModel extends Database {
     public function updateProject() : void {
 
     }
-    public function deleteProject() : void {
 
+    /**
+     * Prepares a sql query with the given parameters to delete every project with an id higher than 0 from the database and executes it.
+     * @return void
+     */
+    public function deleteEveryProject() : void {
+        //I know I could just change :value to 0 and avoid the variable here,
+        // but I wanted it to remain consistent with the createPost method.
+        $value = 0;
+
+        try{
+            $query = $this->get_dbConnection()->prepare("DELETE FROM projects WHERE id > :value;");
+            $query->bindParam(":value", $value);
+            $query->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
     }
 
+    //Currently not used due to file name not appearing in the database.
+    //Stepped over to thumbnail_urls from file names in the database and images stored locally in the project.
     /**
      * @param $file $uploaded project thumbnail.
      * Validates the uploaded file. Checks if file extension and size are supported and checks if it already exists.

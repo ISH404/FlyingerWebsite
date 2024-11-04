@@ -3,7 +3,7 @@
     <!-- &copy; -->
     <div>© 2024 My Website</div>
     <div class="breadcrumbs">Home</div>
-    <div>Email: info@example.com</div>
+    <div>Contact: see contact me page</div>
 </footer>
 <!-- END Footer -->
 

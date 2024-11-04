@@ -4,7 +4,6 @@ require_once './DatabaseItems/Database.php';
 Class ContactModel extends Database {
 
     /**
-     *
      * @param $senderEmail sender's emailaddress
      * @param $senderName sender's name
      * @param $subject sender's email subject

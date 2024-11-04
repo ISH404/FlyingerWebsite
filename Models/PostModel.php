@@ -43,7 +43,7 @@ Class PostModel extends Database {
      * @param $title $title of the post
      * @param $author $author of the post
      * @param $content $content of the post
-     * Prepare a sql query with the given parameters to create a post and execute it.
+     * Prepares a sql query with the given parameters to create a post and executes it.
      * @return void
      */
     public function createPost($title, $author, $content) : void {
@@ -59,9 +59,9 @@ Class PostModel extends Database {
     }
 
     /**
-     * Deletes every post with an id higher than 0 from the database.
+     * Prepares a sql query with the given parameters to delete every post with an id higher than 0 from the database and executes it.
      * @return void
-    */
+     */
     public function deleteEveryPost() : void {
         //I know I could just change :value to 0 and avoid the variable here,
         // but I wanted it to remain consistent with the createPost method.
