@@ -67,27 +67,6 @@ class ProjectModel extends Database {
     }
 
     /**
-     * Prepares a sql query with the given parameters to delete every project with an id higher than 0 from the database and executes it.
-     * @return void
-     */
-    public function deleteEveryProject() : void {
-        //I know I could just change :value to 0 and avoid the variable here,
-        // but I wanted it to remain consistent with the createPost method.
-        $value = 0;
-
-        try{
-            $query = $this->get_dbConnection()->prepare("DELETE FROM projects WHERE id > :value;");
-            $query->bindParam(":value", $value);
-            $query->execute();
-
-            //Delete all locally stored thumbnails
-            $this->deleteLocalThumbnails();
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
-    }
-
-    /**
      * @param $file $uploaded project thumbnail.
      * Validates the uploaded file. Checks if file extension and size are supported and checks if it already exists.
      * If validation succeeds, stores the file locall in uploaded_images folder.
@@ -109,25 +88,6 @@ class ProjectModel extends Database {
             return true;
         }
         return false;
-    }
-
-    /**
-     * Loops through the locally stored thumbnails in the map 'uploaded_images'.
-     * Deletes every thumbnail in that map.
-     * @return void
-    */
-    private function deleteLocalThumbnails() : void {
-        //CREDIT: https://www.geeksforgeeks.org/deleting-all-files-from-a-folder-using-php/
-        $folder_path = './uploaded_images/'; //Specify location of thumbnail folder.
-        $thumbnails = glob($folder_path.'/*'); //Get an array of all the thumbnails in the selected folder path.
-
-        //Loop through each thumbnail in the array.
-        foreach($thumbnails as $thumbnail) {
-            if(is_file($thumbnail)) {
-                //Delete the current thumbnail from the folder.
-                unlink($thumbnail);
-            }
-        }
     }
 
     /**

@@ -22,13 +22,6 @@ require './views/layout/header.php';
                     <input type="file" id="projectThumbnail" name="projectThumbnail" required><br>
                     <input type="submit" name="submit-btn" value="Create project">
                 </form>
-                <!--Nuke all projects button-->
-                <form method="post" action="/projectpage/submit">
-                    <input type="hidden" name="_submit" VALUE="deleteEveryProject">
-                    <!--Hidden input field to determine action in projectpage controller-->
-                    <input type='submit' name="submit-btn" value='Delete all projects'
-                           onclick="return confirm('You are about to nuke the board. Are you sure?')">
-                </form>
             </div>
             <div class="projects-section">
                 <h2>Projects</h2>
