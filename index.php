@@ -61,6 +61,6 @@ switch ($path) {
         break;
 
     default:
-        echo 'something went wrong';
+        require_once './views/errorpage.view.php';
         break;
 }

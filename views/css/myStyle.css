@@ -162,6 +162,16 @@ input[type=text], textarea {
     height: 29px;
 }
 
+.error-return {
+    text-decoration: none;
+    color: lightblue;
+}
+
+.error-return:hover {
+    text-decoration: underline;
+    color:red;
+}
+
 .hidden-id {
     display: none;
 }
