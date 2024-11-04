@@ -59,6 +59,27 @@ Class PostModel extends Database {
     }
 
     /**
+     * @param $title $title of the post
+     * @param $author $author of the post
+     * @param $content $content of the post
+     * @param $postId $id of the post
+     * Prepares a sql query with the given parameters to update a post and executes it.
+     * @return void
+     */
+    public function updatePost($title, $author, $content, $postId) : void{
+        try {
+            $query = $this->get_dbConnection()->prepare("UPDATE posts SET title = :title, author = :author, content = :content WHERE id = :value;");
+            $query->bindParam(":title", $title);
+            $query->bindParam(":author", $author);
+            $query->bindParam(":content", $content);
+            $query->bindParam(":value", $postId);
+            $query->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    /**
      * @param $post_id $id of the post that got selected to be deleted.
      * Prepares a sql query with the given parameters to delete the post with a matching id from the database and executes it.
      * @return void

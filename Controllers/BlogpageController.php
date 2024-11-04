@@ -17,7 +17,7 @@ class BlogpageController {
      * @return void
      */
     public function index() : void {
-        $webpageTitle = 'Blog Page';
+        $webpageTitle = 'Blog';
         $posts = $this->postModel->getPosts();
         require_once "./views/blogpage.view.php";
     }
@@ -34,11 +34,14 @@ class BlogpageController {
             case 'createComment':
                 self::createComment();
                 break;
-            case 'deleteComment':
-                self::deleteComment();
+            case 'updatePost':
+                self::updatePost();
                 break;
             case 'deletePost':
                 self::deletePost();
+                break;
+            case 'deleteComment':
+                self::deleteComment();
                 break;
             case 'deleteEveryPost':
                 self::deleteEveryPost();
@@ -65,6 +68,14 @@ class BlogpageController {
     private function createComment() : void {
         $this->commentModel->createComment($_POST['commentAuthor'], $_POST['commentContent'], $_POST['commentPostId']);
         header('Location: /blogpage');
+    }
+
+    /**
+     * Forwards the request to edit a comment to the correct model.
+     * @return void
+     */
+    private function updatePost() : void{
+        $this->postModel->updatePost($_POST['editedTitle'], $_POST['editedAuthor'], $_POST['editedContent'], $_POST['editPostId']);
     }
 
     /**

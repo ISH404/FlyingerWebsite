@@ -15,7 +15,7 @@ class ProjectpageController
      * @return void
      */
     public function index() : void {
-        $webpageTitle = 'Project Page';
+        $webpageTitle = 'My Projects';
         $projects = $this->projectModel->getProjects();
         require_once './views/projectpage.view.php';
     }

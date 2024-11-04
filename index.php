@@ -7,10 +7,21 @@ $path = $_SERVER['PATH_INFO'] ?? '/'; //Grabs the path after localhost:portnumbe
 //Switch that determines where to redirect to based on the url path.
 switch ($path) {
     case '/':
-    case '/frontpage':
-        require_once './Controllers/FrontpageController.php';
-        $frontpage = new FrontpageController();
-        $frontpage->index();
+        require_once './Controllers/LoginpageController.php';
+        $loginpage = new LoginpageController();
+        $loginpage->index();
+        break;
+
+    case '/loginpage/submit':
+        require_once './Controllers/LoginpageController.php';
+        $loginpage = new LoginpageController();
+        $loginpage->login();
+        break;
+
+    case '/aboutpage':
+        require_once './Controllers/AboutpageController.php';
+        $aboutpage = new AboutpageController();
+        $aboutpage->index();
         break;
 
     case '/projectpage':

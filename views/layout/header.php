@@ -14,7 +14,7 @@
 <header>
     <div class="icon">🖥️</div>
     <div class="menu">
-        <a href="/frontpage">About</a>
+        <a href="/aboutpage">About</a>
         <a href="/projectpage">Projects</a>
         <a href="/blogpage">Blog</a>
         <a href="/contactpage">Contact</a>
