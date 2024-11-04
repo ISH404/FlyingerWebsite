@@ -59,6 +59,21 @@ Class PostModel extends Database {
     }
 
     /**
+     * @param $post_id $id of the post that got selected to be deleted.
+     * Prepares a sql query with the given parameters to delete the post with a matching id from the database and executes it.
+     * @return void
+     */
+    public function deletePost($post_id) : void {
+        try{
+            $query = $this->get_dbConnection()->prepare("DELETE FROM posts WHERE id = :value;");
+            $query->bindParam(":value", $post_id);
+            $query->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    /**
      * Prepares a sql query with the given parameters to delete every post with an id higher than 0 from the database and executes it.
      * @return void
      */

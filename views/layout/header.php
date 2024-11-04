@@ -14,10 +14,10 @@
 <header>
     <div class="icon">🖥️</div>
     <div class="menu">
-        <a href="/frontpage">About Me</a>
-        <a href="/projectpage">My Projects</a>
+        <a href="/frontpage">About</a>
+        <a href="/projectpage">Projects</a>
         <a href="/blogpage">Blog</a>
-        <a href="/contactpage">Contact Me</a>
+        <a href="/contactpage">Contact</a>
     </div>
 </header>
 <!-- End Header -->

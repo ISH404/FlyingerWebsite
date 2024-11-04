@@ -34,6 +34,12 @@ class BlogpageController {
             case 'createComment':
                 self::createComment();
                 break;
+            case 'deleteComment':
+                self::deleteComment();
+                break;
+            case 'deletePost':
+                self::deletePost();
+                break;
             case 'deleteEveryPost':
                 self::deleteEveryPost();
                 break;
@@ -58,6 +64,24 @@ class BlogpageController {
      */
     private function createComment() : void {
         $this->commentModel->createComment($_POST['commentAuthor'], $_POST['commentContent'], $_POST['commentPostId']);
+        header('Location: /blogpage');
+    }
+
+    /**
+     * Forwards the request to delete a post to the correct model.
+     * @return void
+     */
+    private function deletePost() : void {
+        $this->postModel->deletePost($_POST['postId']);
+        header('Location: /blogpage');
+    }
+
+    /**
+     * Forwards the request to delete a comment to the correct model.
+     * @return void
+     */
+    private function deleteComment() : void {
+        $this->commentModel->deleteComment($_POST['commentId']);
         header('Location: /blogpage');
     }
 

@@ -39,6 +39,13 @@ require './views/layout/header.php';
                         <h3><?= $post['title'] ?></h3>
                         <p><?= $post['content'] ?></p>
                         <p><?= 'Posted by ' . $post['author'] . ' at ' . $post['created_at'] ?></p>
+                        <!--delete post button-->
+                        <form method="post" action="/blogpage/submit">
+                            <input type="hidden" name="_submit" VALUE="deletePost">
+                            <input type="hidden" name="postId" VALUE=<?= $post['id'] ?>>
+                            <!--Hidden input field to determine action in blogpage controller-->
+                            <input type='submit' name="submit-btn" value='Delete'>
+                        </form>
                     </div>
                     <!--Form to leave a comment on a post-->
                     <div class="blog-post-comment-form">
@@ -55,12 +62,19 @@ require './views/layout/header.php';
                     </div>
                     <!--Comment content-->
                     <?php if (!empty($post['comments'])) { ?>
-                        <p><strong>Replies</strong></p>
+                        <p class="replies-section">Replies</p>
                         <?php foreach ($post['comments'] as $comment) { ?>
                             <!--Each comment put in html elements-->
                             <div class="blog-post-comment">
                                 <p><?= $comment['content'] ?></p>
                                 <p><?= 'Posted by ' . $comment['author'] . ' at ' . $comment['created_at'] ?></p>
+                                <!--delete comment button-->
+                                <form method="post" action="/blogpage/submit">
+                                    <input type="hidden" name="_submit" VALUE="deleteComment">
+                                    <input type="hidden" name="commentId" VALUE=<?= $comment['comment_id'] ?>>
+                                    <!--Hidden input field to determine action in blogpage controller-->
+                                    <input type='submit' name="submit-btn" value='Delete'>
+                                </form>
                             </div>
                         <?php }
                     } ?>

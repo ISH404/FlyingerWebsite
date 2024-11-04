@@ -25,18 +25,22 @@ class ProjectModel extends Database {
      * @param $description $description of the project.
      * @param $thumbnail $thumbnail of the project.
      * Prepares a sql query with the given parameters to create a project and executes it.
+     * If validation on the thumbnail succeeds, store file name in database.
      * @return void
     */
     public function createProject($name, $description, $thumbnail) : void {
+        //validate file
+        if($this->validateFile($thumbnail)) {
             try {
-                $query = $this->get_dbConnection()->prepare("INSERT INTO projects (name, description, thumbnail_name) VALUES (:name, :description :thumbnail)");
+                $query = $this->get_dbConnection()->prepare("INSERT INTO projects (name, description, thumbnail_name) VALUES (:name, :description, :thumbnail)");
                 $query->bindParam(":name", $name);
                 $query->bindParam(":description", $description);
-                $query->bindParam(":thumbnail", $thumbnail);
+                $query->bindParam(":thumbnail", $thumbnail['name']);
                 $query->execute();
             } catch (PDOException $e) {
                 echo $e->getMessage();
             }
+        }
     }
 
     public function updateProject() : void {
@@ -56,20 +60,22 @@ class ProjectModel extends Database {
             $query = $this->get_dbConnection()->prepare("DELETE FROM projects WHERE id > :value;");
             $query->bindParam(":value", $value);
             $query->execute();
+
+            //Delete all locally stored thumbnails
+            $this->deleteLocalThumbnails();
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
     }
 
-    //Currently not used due to file name not appearing in the database.
-    //Stepped over to thumbnail_urls from file names in the database and images stored locally in the project.
     /**
      * @param $file $uploaded project thumbnail.
      * Validates the uploaded file. Checks if file extension and size are supported and checks if it already exists.
+     * If validation succeeds, stores the file locall in uploaded_images folder.
      * @return bool
      */
     private function validateFile($file) : bool {
-        //https://www.w3schools.com/php/php_file_upload.asp
+        //CREDIT: https://www.w3schools.com/php/php_file_upload.asp
         $file_name = $file['name'];// Get file name
         $file_size = $file['size']; //Get file size
         $file_ext = pathinfo($file_name, PATHINFO_EXTENSION); //Get extension from file
@@ -84,5 +90,24 @@ class ProjectModel extends Database {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Loops through the locally stored thumbnails in the map 'uploaded_images'.
+     * Deletes every thumbnail in that map.
+     * @return void
+    */
+    private function deleteLocalThumbnails() : void {
+        //CREDIT: https://www.geeksforgeeks.org/deleting-all-files-from-a-folder-using-php/
+        $folder_path = './uploaded_images/'; //Specify location of thumbnail folder.
+        $thumbnails = glob($folder_path.'/*'); //Get an array of all the thumbnails in the selected folder path.
+
+        //Loop through each thumbnail in the array.
+        foreach($thumbnails as $thumbnail) {
+            if(is_file($thumbnail)) {
+                //Delete the current thumbnail from the folder.
+                unlink($thumbnail);
+            }
+        }
     }
 }

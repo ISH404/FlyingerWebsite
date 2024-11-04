@@ -82,12 +82,8 @@ input[type=text], textarea {
     text-align: center;
 }
 
-.create-posts-section {
+.create-posts-section, .create-projects-section {
     text-align: center;
-}
-
-.contact-form-section {
-    width: 40%;
 }
 
 #postContent, #contactMessage {
@@ -95,11 +91,15 @@ input[type=text], textarea {
     resize: none;
 }
 
-.blog-posts-section h2 {
+.blog-posts-section h2, .projects-section h2 {
     text-align: center;
 }
 
-.blog-post, .blogpost p {
+.blog-post, .project {
+    margin-top: 25px;
+}
+
+.blog-post, .blogpost p, .project {
     background-color: #222429;
     overflow-wrap: break-word;
     border-style: ridge;
@@ -119,5 +119,20 @@ input[type=text], textarea {
     padding: 5px;
 }
 
+.replies-section {
+    font-weight: bold;
+    margin-left: 30px;
+}
 
+.project-thumbnail {
+    max-width: 256px;
+    max-height: 128px;
+}
 
+.contact-form-section {
+    width: 40%;
+}
+
+.hidden-id {
+    display: none;
+}
