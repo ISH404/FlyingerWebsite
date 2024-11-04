@@ -64,7 +64,7 @@ Class PostModel extends Database {
      * @return void
      */
     public function deletePost($post_id) : void {
-        try{
+        try {
             $query = $this->get_dbConnection()->prepare("DELETE FROM posts WHERE id = :value;");
             $query->bindParam(":value", $post_id);
             $query->execute();

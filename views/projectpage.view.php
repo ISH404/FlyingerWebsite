@@ -42,6 +42,14 @@ require './views/layout/header.php';
                             <img class="project-thumbnail" src="<?= '/uploaded_images/' . $project['thumbnail_name'] ?>" alt='project thumbnail'>
                             <p><?= $project['description'] ?></p>
                         </div>
+                        <!--delete project button-->
+                        <form method="post" action="/projectpage/submit">
+                            <input type="hidden" name="_submit" VALUE="deleteProject">
+                            <input type="hidden" name="projectId" VALUE=<?= $project['id'] ?>>
+                            <input type="hidden" name="thumbnailName" VALUE=<?= $project['thumbnail_name'] ?>>
+                            <!--Hidden input field to determine action in blogpage controller-->
+                            <input type='submit' name="submit-btn" value='Delete'>
+                        </form>
                     </div>
                 <?php } ?>
             </div>

@@ -32,6 +32,9 @@ class ProjectpageController
             case 'editProject':
                 self::editProject();
                 break;
+            case 'deleteProject':
+                self::deleteProject();
+                break;
             case 'deleteEveryProject':
                 self::deleteEveryProject();
                 break;
@@ -54,6 +57,15 @@ class ProjectpageController
      */
     private function editProject() : void {
         //TODO:
+    }
+
+    /**
+     * Forwards the request to delete a project to the correct model.
+     * @return void
+     */
+    private function deleteProject() : void {
+        $this->projectModel->deleteProject($_POST['projectId'], $_POST['thumbnailName']);
+        header('Location: /projectpage');
     }
 
     /**

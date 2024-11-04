@@ -48,6 +48,25 @@ class ProjectModel extends Database {
     }
 
     /**
+     * @param $project_id $id of the project that needs to be deleted.
+     * @param $thumbnail_name $name of the thumbnail that needs to be deleted.
+     * Prepares a sql query with the given parameters to delete a project with a matching id from the database and executes it.
+     * @return void
+     */
+    public function deleteProject($project_id, $thumbnail_name) : void {
+        try {
+            $query = $this->get_dbConnection()->prepare("DELETE FROM projects WHERE id = :value;");
+            $query->bindParam(":value", $project_id);
+            $query->execute();
+
+            //Delete the locally stored thumbnail linked with this project
+            $this->deleteLocalThumbnail($thumbnail_name);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    /**
      * Prepares a sql query with the given parameters to delete every project with an id higher than 0 from the database and executes it.
      * @return void
      */
@@ -105,6 +124,27 @@ class ProjectModel extends Database {
         //Loop through each thumbnail in the array.
         foreach($thumbnails as $thumbnail) {
             if(is_file($thumbnail)) {
+                //Delete the current thumbnail from the folder.
+                unlink($thumbnail);
+            }
+        }
+    }
+
+    /**
+     * @param $thumbnail_name $name of the thumbnail that is getting removed.
+     * Loops through the locally stored thumbnails in the map 'uploaded_images'.
+     * Deletes every thumbnail in that map.
+     * @return void
+     */
+    private function deleteLocalThumbnail($thumbnail_name) : void {
+        //CREDIT: https://www.geeksforgeeks.org/deleting-all-files-from-a-folder-using-php/
+        $folder_path = './uploaded_images'; //Specify location of thumbnail folder.
+        $thumbnails = glob($folder_path.'/*'); //Get an array of all the thumbnails in the selected folder path.
+
+        //Loop through each thumbnail in the array.
+        foreach($thumbnails as $thumbnail) {
+            //Look for a matching file name after removing the filepath from the thumbnail.
+            if(is_file($thumbnail) && basename($thumbnail) == $thumbnail_name) {
                 //Delete the current thumbnail from the folder.
                 unlink($thumbnail);
             }
