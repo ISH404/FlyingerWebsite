@@ -46,6 +46,9 @@ class BlogpageController {
             case 'deleteEveryPost':
                 self::deleteEveryPost();
                 break;
+            case 'reload':
+                Header("Location: /blogpage");
+                break;
         }
     }
 

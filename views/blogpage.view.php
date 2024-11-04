@@ -33,8 +33,11 @@ require './views/layout/header.php';
                 <div class="edit-posts-section" id="edit-posts-form">
                     <!--The section of the website where posts can be edited-->
                     <h2>Edit post</h2>
+                    <!--Current doesn't send a post request on submit button due to a problem
+                    with referring to the required postId needed to update the right post.-->
                     <form method="post" action="/blogpage/submit">
-                        <input type="hidden" name="_submit" VALUE="updatePost">
+                        <!--hidden value set to reload so form data doesn't stick around on submit in combination with the mentioned above-->
+                        <input type="hidden" name="_submit" VALUE="reload">
                         <input type="hidden" id="editPostId" name="editPostId" VALUE="">
                         <!--Hidden input field to determine action in blogpage controller-->
                         <label for="editedTitle">Title:</label><br>
@@ -43,7 +46,7 @@ require './views/layout/header.php';
                         <input type="text" id="editedAuthor" name="editedAuthor" placeholder="please enter your name" required><br>
                         <label for="editedContent">Message:</label><br>
                         <textarea id="editedContent" name="editedContent" placeholder="please enter your message" required></textarea><br>
-                        <input type="submit" class="submit-btn" name="submit-btn" value="Edit post">
+                        <input type="submit" class="submit-btn" name="submit-btn" value="CURRENTLY UNAVAILABLE">
                     </form>
                 </div>
             </div>
@@ -59,7 +62,7 @@ require './views/layout/header.php';
                         <p><?= 'Posted by ' . $post['author'] . ' at ' . $post['created_at'] ?></p>
                         <div class="blog-post-buttons">
                             <!--edit post button-->
-                            <!--TODO: change value below to something to do with filling the form with that posts data.-->
+                            <!--TODO: somehow grab this postid value and set that in the updatePost form-->
                             <input type="hidden" name="postId" VALUE=<?= $post['id'] ?>>
                             <input type='submit' class="submit-btn edit-btn" name="submit-btn" value='Edit'
                                    onclick="changeEditFormStatus()">

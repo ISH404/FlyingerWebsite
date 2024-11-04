@@ -17,13 +17,10 @@ function changeEditFormStatus(){
     }
 }
 
-function getClickedPostId(){
-
-}
-
 function setFormValues(){
+    // Somehow grab the postId from the post related to the clicked button
+    // and set that value to this to allowed editing that specific post.
     const editFormPostIdField = document.getElementById('editPostId');
-    editFormPostIdField.value = "5";
 }
 
 
