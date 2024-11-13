@@ -79,6 +79,7 @@ class BlogpageController {
      */
     private function updatePost() : void{
         $this->postModel->updatePost($_POST['editedTitle'], $_POST['editedAuthor'], $_POST['editedContent'], $_POST['editPostId']);
+        header('Location: /blogpage');
     }
 
     /**

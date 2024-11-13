@@ -5,22 +5,23 @@ const editFormDiv = document.getElementById('edit-posts-form');
 let formVisible = false;
 
 //Swap visibility around of the editFormDiv
-function changeEditFormStatus(){
+function changeEditFormStatus($editPostId){
     if(!formVisible){
         editFormDiv.style.display = 'block';
         formVisible = true;
         //
-        setFormValues();
+        setFormValues($editPostId);
     } else {
         editFormDiv.style.display = 'none';
         formVisible = false;
     }
 }
 
-function setFormValues(){
+function setFormValues($id){
     // Somehow grab the postId from the post related to the clicked button
     // and set that value to this to allowed editing that specific post.
     const editFormPostIdField = document.getElementById('editPostId');
+    editFormPostIdField.value = $id;
 }
 
 

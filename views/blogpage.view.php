@@ -37,7 +37,7 @@ require './views/layout/header.php';
                     with referring to the required postId needed to update the right post.-->
                     <form method="post" action="/blogpage/submit">
                         <!--hidden value set to reload so form data doesn't stick around on submit in combination with the mentioned above-->
-                        <input type="hidden" name="_submit" VALUE="reload">
+                        <input type="hidden" name="_submit" VALUE="updatePost">
                         <input type="hidden" id="editPostId" name="editPostId" VALUE="">
                         <!--Hidden input field to determine action in blogpage controller-->
                         <label for="editedTitle">Title:</label><br>
@@ -46,7 +46,7 @@ require './views/layout/header.php';
                         <input type="text" id="editedAuthor" name="editedAuthor" placeholder="please enter your name" required><br>
                         <label for="editedContent">Message:</label><br>
                         <textarea id="editedContent" name="editedContent" placeholder="please enter your message" required></textarea><br>
-                        <input type="submit" class="submit-btn" name="submit-btn" value="CURRENTLY UNAVAILABLE">
+                        <input type="submit" class="submit-btn" name="submit-btn" value="UPDATE">
                     </form>
                 </div>
             </div>
@@ -65,7 +65,7 @@ require './views/layout/header.php';
                             <!--TODO: somehow grab this postid value and set that in the updatePost form-->
                             <input type="hidden" name="postId" VALUE=<?= $post['id'] ?>>
                             <input type='submit' class="submit-btn edit-btn" name="submit-btn" value='Edit'
-                                   onclick="changeEditFormStatus()">
+                                   onclick="changeEditFormStatus(<?=$post['id']?>)">
                             <!--delete post button-->
                             <form method="post" action="/blogpage/submit">
                                 <input type="hidden" name="_submit" VALUE="deletePost">
